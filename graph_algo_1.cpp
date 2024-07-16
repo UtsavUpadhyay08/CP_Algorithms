@@ -68,9 +68,6 @@ class Graph{
 		if(size[a]<size[b]) swap(a,b);
 		size[a]+=size[b];
 		link[b]=a;
-		debug(a,b)
-		debug(link)
-		debug(size)
 	}
 };
 
