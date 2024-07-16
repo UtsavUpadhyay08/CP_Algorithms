@@ -40,12 +40,14 @@ ll lcm(ll a, ll b){return (a/gcd(a,b))*b;}
 class Graph{
 	ll n,e;
 	vector<vpll> adj;
-	vector<bool> vis;
+	// vector<bool> vis;
+	vll vis;
 	vll dis;
 	public:
 	Graph(ll n){
 		vector<vpll> adj1(n+1);
-		vector<bool> vis1(n+1,false);
+		// vector<bool> vis1(n+1,false);
+		vll vis1(n+1,0);
 		vll dis1(n+1,-1);
 		this->adj=adj1;
 		this->vis=vis1;
@@ -54,7 +56,7 @@ class Graph{
 	}
 	void addedge(ll a,ll b,ll wt){
 		adj[a].pb({b,wt});
-		adj[b].pb({a,wt});
+		// adj[b].pb({a,wt});			//if directed graph comment this
 	}
 	void dfs(ll i){
 		if(vis[i]) return;
@@ -94,6 +96,17 @@ class Graph{
 		}
 		return dis;
 	}
+	bool isCycle(ll node,ll parent){
+		if(vis[node]==2) return false;
+		if(vis[node]==1) return true;
+		vis[node]=1;
+		bool ans=false;
+		for(auto it:adj[node]){
+			if(it.f!=parent) ans=ans|isCycle(it.f,node);
+		}
+		vis[node]=2;
+		return ans;
+	}
 };
 
 
@@ -104,6 +117,7 @@ void solve(){
 		ll a,b;cin>>a>>b;
 		g.addedge(a,b,0);
 	}
+	debug(g.isCycle(1,-1));
 	// g.dfs(1);
 	// debug(g.djikstra(1));
 	// vll a(n);for(auto &x:a) cin>>x;
