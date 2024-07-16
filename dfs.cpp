@@ -40,14 +40,14 @@ ll lcm(ll a, ll b){return (a/gcd(a,b))*b;}
 class Graph{
 	ll n,e;
 	vector<vpll> adj;
-	// vector<bool> vis;
-	vll vis;
+	vector<bool> vis;
+	// vll vis;
 	vll dis;
 	public:
 	Graph(ll n){
 		vector<vpll> adj1(n+1);
-		// vector<bool> vis1(n+1,false);
-		vll vis1(n+1,0);
+		vector<bool> vis1(n+1,false);
+		// vll vis1(n+1,0);
 		vll dis1(n+1,-1);
 		this->adj=adj1;
 		this->vis=vis1;
@@ -81,11 +81,13 @@ class Graph{
 	vll djikstra(ll node){
 		priority_queue<pll> pq;
 		pq.push({0,node});
+		dis[node]=0;
 		while(!pq.empty()){
 			pll vl=pq.top();
 			pq.pop();
 			if(vis[vl.sc]) continue;
 			vis[vl.sc]=true;
+			vl.f*=(-1);
 			for(auto it:adj[vl.sc]){
 				ll node2=it.f,wt=it.sc;
 				if((dis[node2]==-1) || dis[node2]>(vl.f+wt)){
@@ -117,7 +119,7 @@ void solve(){
 		ll a,b;cin>>a>>b;
 		g.addedge(a,b,0);
 	}
-	debug(g.isCycle(1,-1));
+	// debug(g.isCycle(1,-1));
 	// g.dfs(1);
 	// debug(g.djikstra(1));
 	// vll a(n);for(auto &x:a) cin>>x;
