@@ -38,25 +38,29 @@ ll lcm(ll a, ll b){return (a/gcd(a,b))*b;}
 
 
 class Graph{
-	ll n,e;
+	ll n;
 	vector<vpll> adj;
-	vector<bool> vis;
-	// vll vis;
-	vll dis;
+	// vector<bool> vis;
+	vll vis;
+	vll dis,topo;
+	vll indegree;
 	public:
 	Graph(ll n){
-		vector<vpll> adj1(n+1);
-		vector<bool> vis1(n+1,false);
-		// vll vis1(n+1,0);
-		vll dis1(n+1,-1);
-		this->adj=adj1;
-		this->vis=vis1;
-		this->dis=dis1;
-		
+		this->n=n;
+		vector<vpll> adj(n+1);
+		// vector<bool> vis(n+1,false);
+		vll vis(n+1,0);
+		vll dis(n+1,-1);
+		this->adj=adj;
+		this->vis=vis;
+		this->dis=dis;
+		vll indegree(n+1,0);
+		this->indegree=indegree;
 	}
-	void addedge(ll a,ll b,ll wt){
+	void addedge(ll a,ll b,ll wt=0ll){
 		adj[a].pb({b,wt});
 		// adj[b].pb({a,wt});			//if directed graph comment this
+		indegree[b]++;
 	}
 	void dfs(ll i){
 		if(vis[i]) return;
@@ -98,7 +102,14 @@ class Graph{
 		}
 		return dis;
 	}
-	bool isCycle(ll node,ll parent){
+	// bool isCycleDAG(ll i){			//Directed Graph
+		// if(vis[i]) return true;
+		// vis[i]=true;
+		// bool ans=false;
+		// for(auto it:adj[i]) ans=ans|isCycleDAG(it);
+		// return ans;
+	// }
+	bool isCycle(ll node,ll parent){		//Undirected graph
 		if(vis[node]==2) return false;
 		if(vis[node]==1) return true;
 		vis[node]=1;
@@ -109,6 +120,39 @@ class Graph{
 		vis[node]=2;
 		return ans;
 	}
+	void topodfs(ll i){
+		if(vis[i]==2) return;
+		// if(vis[i]==1)   		//Cycle exists
+		vis[i]=1;
+		for(auto it:adj[i]){
+			topodfs(it.f);
+		}
+		vis[i]=2;
+		topo.pb(i);
+	}
+	vll toposort(){
+		for(ll node=1;node<=n;node++){		//Change according to numbering of nodes
+			topodfs(node);
+		}
+		reverse(all(topo));
+		return topo;
+	}
+	vll kahn(){
+		queue<ll> q;
+		fori(i,1,n+1) if(indegree[i]==0) q.push(i);
+		vll ans;
+		while(!q.empty()){
+			ll vl=q.front();
+			q.pop();
+			ans.pb(vl);
+			for(auto it:adj[vl]){
+				indegree[it.f]--;
+				if(indegree[it.f]==0) q.push(it.f);
+			}
+		}
+		if((ll)ans.size()>n) return {};
+		return ans;
+	}
 };
 
 
@@ -117,8 +161,10 @@ void solve(){
 	Graph g(n);
 	fori(i,0,m){
 		ll a,b;cin>>a>>b;
-		g.addedge(a,b,0);
+		g.addedge(a,b);
 	}
+	debug(g.toposort());
+	debug(g.kahn());
 	// debug(g.isCycle(1,-1));
 	// g.dfs(1);
 	// debug(g.djikstra(1));
