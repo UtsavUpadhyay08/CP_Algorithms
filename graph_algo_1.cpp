@@ -40,19 +40,22 @@ ll lcm(ll a, ll b){return (a/gcd(a,b))*b;}
 class Graph{
 	ll n;
 	vector<vpll> adj;
+	vector<bool> vis;
+	set<pair<ll,pll>> edges;
 	vll link,size;
 	public:
 	Graph(ll n){
 		this->n=n;
-		vector<vpll> adj(n+1);
-		this->adj=adj;
-		vll link(n+1),size(n+1,1);
+		adj.resize(n+1);
+		link.resize(n+1);
+		size.resize(n+1,1);
 		fori(i,0,n+1) link[i]=i;
-		this->link=link;
-		this->size=size;
+		vis.resize(n+1,false);
 	}
 	void addedge(ll a,ll b,ll wt=0ll){
 		adj[a].pb({b,wt});
+		edges.insert({wt,{a,b}});
+		edges.insert({wt,{b,a}});
 		// adj[b].pb({a,wt});			//if directed graph comment this
 	}
 	ll find(ll a){
@@ -68,9 +71,36 @@ class Graph{
 		if(size[a]<size[b]) swap(a,b);
 		size[a]+=size[b];
 		link[b]=a;
-		debug(a,b)
-		debug(link)
-		debug(size)
+	}
+	ll prim(){
+		priority_queue<pll> pq;
+		pq.push({0,0});
+		ll ans=0;
+		while(!pq.empty()){
+			ll node=pq.top().sc,wt=(-1)*pq.top().f;
+			pq.pop();
+			if(vis[node]) continue;
+			vis[node]=true;
+			ans+=wt;
+			for(auto it:adj[node]){
+				if(!vis[it.f]){
+					pq.push({(-1)*it.sc,it.f});
+				}
+			}
+		}
+		return ans;
+	}
+	vector<pair<ll,pll>> kruskal(){
+		debug(edges)
+		vector<pair<ll,pll>> ans;
+		while(((ll)ans.size())!=(n-1)){
+			pair<ll,pll> p=*edges.begin();
+			edges.erase(edges.begin());
+			if(same(p.sc.f,p.sc.sc)) continue;
+			ans.pb(p);
+			unite(p.sc.f,p.sc.sc);
+		}
+		return ans;
 	}
 };
 
@@ -81,9 +111,9 @@ void solve(){
 	fori(i,0,m){
 		ll a,b;cin>>a>>b;
 		g.addedge(a,b);
-		g.unite(a,b);
+		// g.unite(a,b);
 	}
-	debug(g.same(3,5))
+	// debug(g.kruskal());
 	// vll a(n);for(auto &x:a) cin>>x;
 	// string s;cin>>s;
 }

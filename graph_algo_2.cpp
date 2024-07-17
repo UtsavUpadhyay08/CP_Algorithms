@@ -47,15 +47,12 @@ class Graph{
 	public:
 	Graph(ll n){
 		this->n=n;
+		adj.resize(n+1);
+		dis.resize(n+1,-1);
+		vis.resize(n+1,0);
+		// vis.resize(n+1,false);
+		indegree.resize(n+1,0);
 		vector<vpll> adj(n+1);
-		// vector<bool> vis(n+1,false);
-		vll vis(n+1,0);
-		vll dis(n+1,-1);
-		this->adj=adj;
-		this->vis=vis;
-		this->dis=dis;
-		vll indegree(n+1,0);
-		this->indegree=indegree;
 	}
 	void addedge(ll a,ll b,ll wt=0ll){
 		adj[a].pb({b,wt});
@@ -163,8 +160,8 @@ void solve(){
 		ll a,b;cin>>a>>b;
 		g.addedge(a,b);
 	}
-	debug(g.toposort());
-	debug(g.kahn());
+	// debug(g.toposort());
+	// debug(g.kahn());
 	// debug(g.isCycle(1,-1));
 	// g.dfs(1);
 	// debug(g.djikstra(1));
