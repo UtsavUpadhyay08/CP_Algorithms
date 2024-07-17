@@ -54,9 +54,8 @@ class Graph{
 		indegree.resize(n+1,0);
 		vector<vpll> adj(n+1);
 	}
-	void addedge(ll a,ll b,ll wt=0ll){
+	void addedge(ll a,ll b,ll wt=0ll){  //if undirected call a,b then b,a
 		adj[a].pb({b,wt});
-		// adj[b].pb({a,wt});			//if directed graph comment this
 		indegree[b]++;
 	}
 	void dfs(ll i){

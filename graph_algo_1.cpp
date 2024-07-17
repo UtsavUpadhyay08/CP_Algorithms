@@ -44,6 +44,7 @@ class Graph{
 	set<pair<ll,pll>> edges;
 	vll dis;
 	vll link,size;
+	// vector<vll> adj,dis;
 	public:
 	Graph(ll n){
 		this->n=n;
@@ -53,12 +54,15 @@ class Graph{
 		fori(i,0,n+1) link[i]=i;
 		vis.resize(n+1,false);
 		dis.resize(n+1,INF);
+		//adj matrix
+		// adj.resize(n+1,vll(n+1,INF));
+		// dis.resize(n+1,vll(n+1,INF));
 	}
-	void addedge(ll a,ll b,ll wt=0ll){
+	void addedge(ll a,ll b,ll wt=0ll){ 		//if undirected graph call this for a,b then b,a
 		adj[a].pb({b,wt});
 		edges.insert({wt,{a,b}});
-		edges.insert({wt,{b,a}});
-		// adj[b].pb({a,wt});			//if directed graph comment this
+		// adj[a][b]=wt;
+		// dis[a][b]=wt;
 	}
 	ll find(ll a){
 		if(link[a]==a) return a;		// finds the parent
@@ -117,6 +121,17 @@ class Graph{
 		}
 		return dis;
 	}
+	// vector<vll> floyd_warshall(){
+		// for(ll i=0;i<=n;i++) dis[i][i]=0;
+		// for(ll k=0;k<=n;k++){
+			// for(ll i=0;i<=n;i++){
+				// for(ll j=0;j<=n;j++){
+					// dis[i][j]=min(dis[i][j],dis[i][k]+dis[k][j]);
+				// }
+			// }
+		// }
+		// return dis;
+	// }
 };
 
 
@@ -124,8 +139,9 @@ void solve(){
 	ll n,m;cin>>n>>m;
 	Graph g(n);
 	fori(i,0,m){
-		ll a,b;cin>>a>>b;
-		g.addedge(a,b);
+		ll a,b,wt;cin>>a>>b>>wt;
+		g.addedge(a,b,wt);
+		g.addedge(b,a,wt);
 		// g.unite(a,b);
 	}
 	// debug(g.bellman_ford(2));
