@@ -28,7 +28,7 @@ typedef tree<ll,null_type,less<ll>,rb_tree_tag,tree_order_statistics_node_update
 #endif
 
 const ll mod=1e9+7;
-
+const ll INF=1e9;
 #define fori(i,a,b) for(ll i=a;i<b;i++)
 #define vprint(v) for (auto it : v) cout << it << " "
 #define all(a) a.begin(),a.end()
@@ -42,6 +42,7 @@ class Graph{
 	vector<vpll> adj;
 	vector<bool> vis;
 	set<pair<ll,pll>> edges;
+	vll dis;
 	vll link,size;
 	public:
 	Graph(ll n){
@@ -51,6 +52,7 @@ class Graph{
 		size.resize(n+1,1);
 		fori(i,0,n+1) link[i]=i;
 		vis.resize(n+1,false);
+		dis.resize(n+1,INF);
 	}
 	void addedge(ll a,ll b,ll wt=0ll){
 		adj[a].pb({b,wt});
@@ -91,7 +93,6 @@ class Graph{
 		return ans;
 	}
 	vector<pair<ll,pll>> kruskal(){
-		debug(edges)
 		vector<pair<ll,pll>> ans;
 		while(((ll)ans.size())!=(n-1)){
 			pair<ll,pll> p=*edges.begin();
@@ -101,6 +102,20 @@ class Graph{
 			unite(p.sc.f,p.sc.sc);
 		}
 		return ans;
+	}
+	vll bellman_ford(ll strt){
+		dis[strt]=0;
+		fori(i,0,n-1){
+			for(auto e:edges){
+				dis[e.sc.sc]=min(dis[e.sc.sc],e.f+dis[e.sc.f]);
+			}
+		}
+		for(auto e:edges){
+			if(dis[e.sc.sc]>(e.f+dis[e.sc.f])){			//negative cycle
+				dis[strt]=-1;
+			}
+		}
+		return dis;
 	}
 };
 
@@ -113,6 +128,7 @@ void solve(){
 		g.addedge(a,b);
 		// g.unite(a,b);
 	}
+	// debug(g.bellman_ford(2));
 	// debug(g.kruskal());
 	// vll a(n);for(auto &x:a) cin>>x;
 	// string s;cin>>s;
