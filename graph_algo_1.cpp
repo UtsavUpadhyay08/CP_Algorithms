@@ -71,7 +71,6 @@ class Graph{
 		if(size[a]<size[b]) swap(a,b);
 		size[a]+=size[b];
 		link[b]=a;
-<<<<<<< HEAD
 	}
 	ll prim(){
 		priority_queue<pll> pq;
@@ -102,8 +101,6 @@ class Graph{
 			unite(p.sc.f,p.sc.sc);
 		}
 		return ans;
-=======
->>>>>>> c0f4cb111d088663f1a2abd3d246352d5503c9f1
 	}
 };
 
