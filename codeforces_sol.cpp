@@ -36,10 +36,31 @@ const ll mod=1e9+7;
 ll gcd(ll a, ll b){return b==0?a:gcd(b,a%b);}
 ll lcm(ll a, ll b){return (a/gcd(a,b))*b;}
 
-void solve(){
-	ll n;cin>>n;
-	// vll a(n);for(auto &x:a) cin>>x;
-	// string s;cin>>s;
+void solve() {
+    ll n,k;cin>>n>>k;
+    vll a(n);for(auto &x:a) cin>>x;
+    vll b(k);for(auto &x:b) cin>>x;
+
+    mll mp;
+    fori(i,0,n) mp[a[i]]=b[i];
+    ll ans=0;
+    
+    for(auto it=mp.begin();it!=mp.end();it++){
+        ll vl=0;
+
+        if(mp.find(it->f+1)!=mp.end()) vl=mp[it->f+1];
+        ll vl2=min(it->sc,k/(it->f)),val=k-(vl2*(it->f)),tmp=0;
+        
+        if(vl>0){
+            tmp=min(vl,val/((it->f)+1));
+            val-=tmp*((it->f)+1);
+        }
+        ans=max(ans,tmp*(it->f)*2+tmp);
+        ll lft=vl-tmp;
+        tmp-=min(min(tmp,val),lft);
+        ans=max(ans,tmp*(it->f)*2+tmp);
+    }
+    cout<<ans;
 }
 
 int main() {
