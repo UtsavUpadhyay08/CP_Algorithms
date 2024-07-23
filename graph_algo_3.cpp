@@ -95,12 +95,59 @@ class Kosaraju:public Graph{
 	}
 };
 
+class Tarjan:public Graph{
+	stack<ll> st;
+	vll low,disc;
+	vector<bool> instack;
+	public:
+	Tarjan(ll n):Graph(n){
+		low.resize(n+1,-1);
+		disc.resize(n+1,-1);
+		instack.resize(n+1,false);
+	}
+	void dfs(ll i,vector<vll> &ans){
+		static int time=0;
+		disc[i]=low[i]=time++;
+		st.push(i);
+		instack[i]=true;
+		for(auto it:adj[i]){
+			if(disc[it.f]==-1){
+				dfs(it.f,ans);
+				low[i]=min(low[i],low[it.f]);
+			}
+			else if(instack[it.f]){
+				low[i]=min(low[i],disc[it.f]);
+			}
+		}
+		if(disc[i]==low[i]){
+			vll ans1;
+			while(st.top()!=i){
+				instack[st.top()]=false;
+				ans1.pb(st.top());
+				st.pop();
+			}
+			instack[st.top()]=false;
+			ans1.pb(st.top());
+			st.pop();
+			ans.pb(ans1);
+		}
+	}
+	vector<vll> algo(){
+		vector<vll> ans;
+		fori(i,1,n+1){
+			if(disc[i]==-1) dfs(i,ans);
+		}
+		return ans;
+	}
+	
+};
+
 void solve(){
 	ll n,m;cin>>n>>m;
-	Kosaraju g(n);
+	Tarjan g(n);
 	fori(i,0,m){
 		ll a,b;cin>>a>>b;
-		g.addedge(a,b);
+		g.addedge(a+1,b+1);
 	}
 	vector<vll> ans=g.algo();
 	fori(i,0,ans.size()){
