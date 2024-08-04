@@ -36,26 +36,10 @@ const ll mod=1e9+7;
 ll gcd(ll a, ll b){return b==0?a:gcd(b,a%b);}
 ll lcm(ll a, ll b){return (a/gcd(a,b))*b;}
 
-
 void solve(){
 	ll n;cin>>n;
-	string s;cin>>s;
-	ll ans=1,chnc=1;
-	fori(i,1,n){
-		debug(i,chnc);
-		if(s[i]==s[i-1]){
-			if(chnc==1){
-				ans++;
-				chnc=0;
-			}
-			else chnc=1;
-		}
-		else{
-			ans++;
-			chnc=1;
-		}
-	}
-	cout<<ans;
+	// vll a(n);for(auto &x:a) cin>>x;
+	// string s;cin>>s;
 }
 
 int main() {
@@ -63,7 +47,7 @@ int main() {
     cin.tie(NULL);
     cout.tie(NULL);
     
-	solve();
-    // ll t;cin>>t;while(t--){solve();cout<<"\n";}
+	// solve();
+    ll t;cin>>t;while(t--){solve();cout<<"\n";}
     return 0;
 }
