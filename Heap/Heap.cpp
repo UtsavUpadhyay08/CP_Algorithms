@@ -36,6 +36,31 @@ const ll mod=1e9+7;
 ll gcd(ll a, ll b){return b==0?a:gcd(b,a%b);}
 ll lcm(ll a, ll b){return (a/gcd(a,b))*b;}
 
+class Heap{
+	protected:
+	ll n;
+	vll tree;
+	public:
+	Heap(ll n){
+		this->n=n;
+		tree.resize(n+1,0);
+	}
+};
+
+class MaxHeap:public Heap{
+	public:
+	void heapify(ll i){
+		ll l=2*i+1,r=2*i+2,largest=i;
+		if(l<n && tree[l]>tree[largest]) largest=l;
+		if(r<n && tree[r]>tree[largest]) largest=r;
+		if(largest!=i){
+			swap(tree[largest],tree[i]);
+			heapify(largest);
+		}
+	}
+};
+
+
 void solve(){
 	ll n;cin>>n;
 	// vll a(n);for(auto &x:a) cin>>x;

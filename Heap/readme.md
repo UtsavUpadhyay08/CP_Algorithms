@@ -17,7 +17,7 @@ Use a heap when the focus is on inserting, finding, and deleting the minimum or 
 
 - **Tree-based**: Heaps are tree-based data structures.
 - **Complete Binary Tree**: Nodes are filled level-wise and from left to right.
-- **Heap Property**: Each node is the maximum (in a Max Heap) or minimum (in a Min Heap) among all its children.
+- **Heap Property**: Each root node in all subtree is the maximum (in a Max Heap) or minimum (in a Min Heap) among all its children.
 
 > **Note**: A heap could be binary or n-ary. There are also other types such as Fibonacci heaps and binomial heaps.
 
@@ -41,6 +41,36 @@ A heap can be represented as an array:
 
 ## Algorithms
 
-- **Heapify**:
+- **Heapify**: The process of rearranging the heap by comparing each parent with its children recursively is called heapify. Here, we will be implementing max_heap.
+
+  Assume that the entire tree is a heap except the root node (for understanding this algorithm).
+
+  **Process**:
+
+  1. If the root is smaller than the left or right child, swap the root with the larger of the two children and call heapify on that child node.
+  2. Continue this process until reaching a leaf node or the parent is greater than both its children.
+
+  **Code**:
+
+  ```cpp
+  void heapify(ll i) {
+      ll l = 2*i + 1;
+      ll r = 2*i + 2;
+      ll largest = i;
+
+      if (l < n && tree[l] > tree[largest])
+          largest = l;
+      if (r < n && tree[r] > tree[largest])
+          largest = r;
+      if (largest != i) {
+          swap(tree[largest], tree[i]);
+          heapify(largest);
+      }
+  }
+  Complexity:
+  Time Complexity: O(log n) //Height of tree
+  Space Complexity: O(log n) //Height of tree
+  ```
+
 - **Build Heap**:
 - **Heapsort**:
