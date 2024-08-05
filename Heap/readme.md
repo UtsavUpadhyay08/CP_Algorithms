@@ -41,37 +41,40 @@ A heap can be represented as an array:
 
 ## Algorithms
 
-- **Heapify**: The process of rearranging the heap by comparing each parent with its children recursively is called heapify. Here, we will be implementing max_heap.
+- ## **Heapify**
 
-  > **Note**: Heapify is applied at a node only if its left and right child subtree follow the heap property.
+The process of rearranging the heap by comparing each parent with its children recursively is called heapify. Here, we will be implementing max_heap.
 
-  **Process**:
+> **Note**: Heapify is applied at a node only if its left and right child subtree follow the heap property.
 
-  1. If the root is smaller than the left or right child, swap the root with the larger of the two children and call heapify on that child node.
-  2. Stop this process when reaching a leaf node or the parent is greater than both its children.
+**Process**:
 
-  **Code**:
+1. If the root is smaller than the left or right child, swap the root with the larger of the two children and call heapify on that child node.
+2. Stop this process when reaching a leaf node or the parent is greater than both its children.
 
-  ```cpp
-  void heapify(ll i) {
-      ll l = 2*i + 1;
-      ll r = 2*i + 2;
-      ll largest = i;
+**Code**:
 
-      if (l < n && tree[l] > tree[largest])
-          largest = l;
-      if (r < n && tree[r] > tree[largest])
-          largest = r;
-      if (largest != i) {
-          swap(tree[largest], tree[i]);
-          heapify(largest);
-      }
-  }
-  Time Complexity: O(log n) //Height of tree
-  Space Complexity: O(log n) //Height of tree
-  ```
+```cpp
+void heapify(ll i) {
+    ll l = 2*i + 1;
+    ll r = 2*i + 2;
+    ll largest = i;
 
-- **Build Heap**:
+    if (l < n && tree[l] > tree[largest])
+        largest = l;
+    if (r < n && tree[r] > tree[largest])
+        largest = r;
+    if (largest != i) {
+        swap(tree[largest], tree[i]);
+        heapify(largest);
+    }
+}
+Time Complexity: O(log n) //Height of tree
+Space Complexity: O(log n) //Height of tree
+```
+
+- ## **Build Heap**:
+
   Now here we just need to call heapify in bottom-up order as we know that heapify could only be applied at a node if the left and right subtrees are heaps. So, leaving the leaf nodes, we just need to call heapify at all nodes in bottom-up order.
 
   From [Concepts](#concepts), we know that the range of internal nodes is from 0 to `ceil(n/2) - 1`, so just run a loop in backward order from `ceil(n/2) - 1` to 0.
@@ -88,4 +91,4 @@ A heap can be represented as an array:
 
   > **Note**: [Proof of time complexity why it is not O(n log n) but O(n)](https://www.geeksforgeeks.org/time-complexity-of-building-a-heap/)
 
-- **Heapsort**:
+- ## **Heapsort**:
