@@ -43,12 +43,12 @@ A heap can be represented as an array:
 
 - **Heapify**: The process of rearranging the heap by comparing each parent with its children recursively is called heapify. Here, we will be implementing max_heap.
 
-  Assume that the entire tree is a heap except the root node (for understanding this algorithm).
+  > **Note**: Heapify is applied at a node only if its left and right child subtree follow the heap property.
 
   **Process**:
 
   1. If the root is smaller than the left or right child, swap the root with the larger of the two children and call heapify on that child node.
-  2. Continue this process until reaching a leaf node or the parent is greater than both its children.
+  2. Stop this process when reaching a leaf node or the parent is greater than both its children.
 
   **Code**:
 
@@ -67,10 +67,25 @@ A heap can be represented as an array:
           heapify(largest);
       }
   }
-  Complexity:
   Time Complexity: O(log n) //Height of tree
   Space Complexity: O(log n) //Height of tree
   ```
 
 - **Build Heap**:
+  Now here we just need to call heapify in bottom-up order as we know that heapify could only be applied at a node if the left and right subtrees are heaps. So, leaving the leaf nodes, we just need to call heapify at all nodes in bottom-up order.
+
+  From [Concepts](#concepts), we know that the range of internal nodes is from 0 to `ceil(n/2) - 1`, so just run a loop in backward order from `ceil(n/2) - 1` to 0.
+
+  ```cpp
+  void build() {
+      for (ll i = ceil(n / 2.0) - 1; i >= 0; i--) {
+          heapify(i);
+      }
+  }
+  Time Complexity: O(n)
+  Space Complexity: O(log n) // Height of the tree
+  ```
+
+  > **Note**: [Proof of time complexity why it is not O(n log n) but O(n)](https://www.geeksforgeeks.org/time-complexity-of-building-a-heap/)
+
 - **Heapsort**:

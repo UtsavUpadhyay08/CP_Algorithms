@@ -49,6 +49,7 @@ class Heap{
 
 class MaxHeap:public Heap{
 	public:
+	MaxHeap(ll n):Heap(n){}
 	void heapify(ll i){
 		ll l=2*i+1,r=2*i+2,largest=i;
 		if(l<n && tree[l]>tree[largest]) largest=l;
@@ -58,11 +59,17 @@ class MaxHeap:public Heap{
 			heapify(largest);
 		}
 	}
+	void build(){
+		for(ll i=ceil(n/2.0)-1;i>=0;i--){
+			heapify(i);
+		}
+	}
 };
 
 
 void solve(){
 	ll n;cin>>n;
+	MaxHeap h(n);
 	// vll a(n);for(auto &x:a) cin>>x;
 	// string s;cin>>s;
 }
