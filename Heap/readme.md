@@ -35,7 +35,7 @@ A heap can be represented as an array:
 - **Size of Array Storing Tree**: The size of the array storing the tree is given by `2^(h+1) - 1` (maximum nodes in the entire tree) where `h` is the height of the tree.
 - **Height of a Tree**: The height `h` of a tree is given by `h = floor(log2(n))` where `n` is the number of nodes.
 - **Range of Internal Nodes**: The range of internal nodes is from `0` to `ceil(n/2) - 1`.
-- **Range of Leaves**: The range of leaves is from `ceil(n/2)` to `n`.
+- **Range of Leaves**: The range of leaves is from `ceil(n/2)` to `n-1`.
 
   (Assuming 0-based indexing; if using 1-based indexing, add 1 to the indexes.)
 
