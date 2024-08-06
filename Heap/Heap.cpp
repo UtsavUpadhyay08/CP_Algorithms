@@ -84,7 +84,12 @@ class MaxHeap:public Heap{
 		}
 	}
 	void decreaseKey(ll i,ll key){
-		
+		if(key>tree[i]){
+			increase(i,key);
+			return;
+		}
+		tree[i]=key;
+		heapify(i);
 	}
 };
 

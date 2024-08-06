@@ -69,8 +69,8 @@ void heapify(ll i) {
         heapify(largest);
     }
 }
-Time Complexity: O(log n) //Height of tree
-Space Complexity: O(log n) //Height of tree
+// Time Complexity: O(log n) //Height of tree
+// Space Complexity: O(log n) //Height of tree
 ```
 
 - ## **Build Heap**:
@@ -85,11 +85,11 @@ Space Complexity: O(log n) //Height of tree
           heapify(i);
       }
   }
-  Time Complexity: O(n)
-  Space Complexity: O(log n) // Height of the tree
+  //Time Complexity: O(n)
+  //Space Complexity: O(log n) // Height of the tree
   ```
 
-  > **Note**: [Proof of time complexity why it is not O(n log n) but O(n)](https://www.geeksforgeeks.org/time-complexity-of-building-a-heap/)
+> **Note**: [Proof of time complexity why it is not O(n log n) but O(n)](https://www.geeksforgeeks.org/time-complexity-of-building-a-heap/)
 
 - ## **Extract Max**:
 
@@ -104,8 +104,8 @@ Space Complexity: O(log n) //Height of tree
     heapify(0);
     return mx;
   }
-  Time Complexity: O(log n)
-  Space Complexity: O(log n)
+  //Time Complexity: O(log n)
+  //Space Complexity: O(log n)
   ```
 
 - ## **Increase Key**:
@@ -124,8 +124,29 @@ Space Complexity: O(log n) //Height of tree
             i /= 2;
         }
     }
-    Time Complexity: O(log n)
-    Space Complexity: O(1)
+    //Time Complexity: O(log n)
+    //Space Complexity: O(1)
+  ```
+
+- ## **Decrease Key**:
+
+  Decrease the key at the given index then call heapify at that index.
+
+  ```cpp
+    void decreaseKey(ll i, ll key) {
+        if (key > tree[i]) {
+            increase(i, key);
+            return;
+        }
+        tree[i] = key;
+        heapify(i);
+    }
+    //Time Complexity: O(log n)
+    //Space Complexity: O(log n)
   ```
 
 - ## **Heapsort**:
+
+```
+
+```
