@@ -75,9 +75,9 @@ The process of rearranging the heap by comparing each parent with its children r
 
 - ## **Build Heap**:
 
-  Now here we just need to call heapify in bottom-up order as we know that heapify could only be applied at a node if the left and right subtrees are heaps. So, leaving the leaf nodes, we just need to call heapify at all nodes in bottom-up order.
+Now here we just need to call heapify in bottom-up order as we know that heapify could only be applied at a node if the left and right subtrees are heaps. So, leaving the leaf nodes, we just need to call heapify at all nodes in bottom-up order.
 
-  From [Concepts](#concepts), we know that the range of internal nodes is from 0 to `ceil(n/2) - 1`, so just run a loop in backward order from `ceil(n/2) - 1` to 0.
+From [Concepts](#concepts), we know that the range of internal nodes is from 0 to `ceil(n/2) - 1`, so just run a loop in backward order from `ceil(n/2) - 1` to 0.
 
 ```cpp
     void build() {
@@ -93,7 +93,7 @@ The process of rearranging the heap by comparing each parent with its children r
 
 - ## **Extract Max**:
 
-  Store 0th index of the array as maximum element replace it with last element call heapify on root.
+Store 0th index of the array as maximum element replace it with last element call heapify on root.
 
 ```cpp
     ll maxHeap() {
@@ -110,7 +110,7 @@ The process of rearranging the heap by comparing each parent with its children r
 
 - ## **Increase Key**:
 
-  Increase the key at the given index then compare it to the parent if it becomes larger than parent swap continue it till the condition till i>0 and parent is less than node.
+Increase the key at the given index then compare it to the parent if it becomes larger than parent swap continue it till the condition till i>0 and parent is less than node.
 
 ```cpp
     void increaseKey(ll i, ll key) {
@@ -130,7 +130,7 @@ The process of rearranging the heap by comparing each parent with its children r
 
 - ## **Decrease Key**:
 
-  Decrease the key at the given index then call heapify at that index.
+Decrease the key at the given index then call heapify at that index.
 
 ```cpp
     void decreaseKey(ll i, ll key) {
@@ -147,7 +147,7 @@ The process of rearranging the heap by comparing each parent with its children r
 
 - ## **Insert Key**:
 
-  Increase the size of tree array insert the key at last index then compare it to the parent if it becomes larger than parent swap continue it till the condition till i>0 and parent is less than node.
+Increase the size of tree array insert the key at last index then compare it to the parent if it becomes larger than parent swap continue it till the condition till i>0 and parent is less than node.
 
 ```cpp
     void insertElement(ll key) {
