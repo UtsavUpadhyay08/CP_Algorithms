@@ -38,7 +38,7 @@ class Solution {
                     }
                 }
                 // cout<<i;
-                debug(i,mid,num,l,r);
+                // debug(i,mid,num,l,r);
                 if(((num+1)&num)==0){
                     ans=max(ans,mid-i+1);
                     l=mid+1;

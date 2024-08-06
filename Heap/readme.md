@@ -146,6 +146,7 @@ The process of rearranging the heap by comparing each parent with its children r
 ```
 
 - ## **Insert Key**:
+
   Increase the size of tree array insert the key at last index then compare it to the parent if it becomes larger than parent swap continue it till the condition till i>0 and parent is less than node.
 
 ```cpp
@@ -164,8 +165,21 @@ The process of rearranging the heap by comparing each parent with its children r
 
 - ## **Heapsort**:
 
-```
+In a max heap we know the root is the greatest element swap it with last index of tree then decrease the size of tree and call heapify at root.
 
+```cpp
+    vll heapsort() {
+        build();
+        ll n1 = n;
+        for (ll i = (n1 - 1); i > 0; i--) {
+            swap(tree[i], tree[0]);
+            n--;
+            heapify(0);
+        }
+        return tree;
+    }
+    //Time Complexity: O(nlog n)
+    //Space Complexity: O(log n)
 ```
 
 > **Note**: Operations like finding, deleting random elements or extracting minimum element from a max Heap takes O(n) time complexity since we have to perform linear search.

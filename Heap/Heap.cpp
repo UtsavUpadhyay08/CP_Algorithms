@@ -45,11 +45,16 @@ class Heap{
 		this->n=n;
 		tree.resize(n+1,0);
 	}
+	Heap(ll n,vll a){
+		this->n=n;
+		for(auto it:a) tree.pb(it);
+	}
 };
 
 class MaxHeap:public Heap{
 	public:
 	MaxHeap(ll n):Heap(n){}
+	MaxHeap(ll n,vll a):Heap(n,a){}
 	void heapify(ll i){
 		ll l=2*i+1,r=2*i+2,largest=i;
 		if(l<n && tree[l]>tree[largest]) largest=l;
@@ -85,7 +90,7 @@ class MaxHeap:public Heap{
 	}
 	void decreaseKey(ll i,ll key){
 		if(key>tree[i]){
-			increase(i,key);
+			increaseKey	(i,key);
 			return;
 		}
 		tree[i]=key;
@@ -100,13 +105,25 @@ class MaxHeap:public Heap{
 			i/=2;
 		}
 	}
+	vll heapsort(){
+		build();
+		ll n1=n;
+		for(ll i=(n1-1);i>0;i--){
+			swap(tree[i],tree[0]);
+			n--;
+			heapify(0);
+		}
+		return tree;
+	}
 };
 
 
 void solve(){
 	ll n;cin>>n;
-	MaxHeap h(n);
-	// vll a(n);for(auto &x:a) cin>>x;
+	vll a(n);for(auto &x:a) cin>>x;
+	// debug(a)
+	// MaxHeap vl(n,a);
+	// debug(vl.heapsort());
 	// string s;cin>>s;
 }
 
@@ -115,7 +132,7 @@ int main() {
     cin.tie(NULL);
     cout.tie(NULL);
     
-	// solve();
-    ll t;cin>>t;while(t--){solve();cout<<"\n";}
+	solve();
+    // ll t;cin>>t;while(t--){solve();cout<<"\n";}
     return 0;
 }
