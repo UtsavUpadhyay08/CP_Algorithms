@@ -91,4 +91,23 @@ Space Complexity: O(log n) //Height of tree
 
   > **Note**: [Proof of time complexity why it is not O(n log n) but O(n)](https://www.geeksforgeeks.org/time-complexity-of-building-a-heap/)
 
+- ## **ExtractMax**:
+
+  Store 0th index of the array as maximum element replace it with last element call heapify on root.
+
+  ```cpp
+  ll maxHeap() {
+    if (n == 0) return -1 ll;
+    ll mx = tree[0];
+    tree[0] = tree[n - 1];
+    n--;
+    heapify(0);
+    return mx;
+  }
+  Time Complexity: O(log n)
+  Space Complexity: O(log n)
+  ```
+
+- ##
+
 - ## **Heapsort**:
