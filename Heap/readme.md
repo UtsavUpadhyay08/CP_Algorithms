@@ -55,22 +55,22 @@ The process of rearranging the heap by comparing each parent with its children r
 **Code**:
 
 ```cpp
-void heapify(ll i) {
-    ll l = 2*i + 1;
-    ll r = 2*i + 2;
-    ll largest = i;
+    void heapify(ll i) {
+        ll l = 2*i + 1;
+        ll r = 2*i + 2;
+        ll largest = i;
 
-    if (l < n && tree[l] > tree[largest])
-        largest = l;
-    if (r < n && tree[r] > tree[largest])
-        largest = r;
-    if (largest != i) {
-        swap(tree[largest], tree[i]);
-        heapify(largest);
+        if (l < n && tree[l] > tree[largest])
+            largest = l;
+        if (r < n && tree[r] > tree[largest])
+            largest = r;
+        if (largest != i) {
+            swap(tree[largest], tree[i]);
+            heapify(largest);
+        }
     }
-}
-// Time Complexity: O(log n) //Height of tree
-// Space Complexity: O(log n) //Height of tree
+    // Time Complexity: O(log n) //Height of tree
+    // Space Complexity: O(log n) //Height of tree
 ```
 
 - ## **Build Heap**:
@@ -79,15 +79,15 @@ void heapify(ll i) {
 
   From [Concepts](#concepts), we know that the range of internal nodes is from 0 to `ceil(n/2) - 1`, so just run a loop in backward order from `ceil(n/2) - 1` to 0.
 
-  ```cpp
-  void build() {
-      for (ll i = ceil(n / 2.0) - 1; i >= 0; i--) {
-          heapify(i);
-      }
-  }
-  //Time Complexity: O(n)
-  //Space Complexity: O(log n) // Height of the tree
-  ```
+```cpp
+    void build() {
+        for (ll i = ceil(n / 2.0) - 1; i >= 0; i--) {
+            heapify(i);
+        }
+    }
+    //Time Complexity: O(n)
+    //Space Complexity: O(log n) // Height of the tree
+```
 
 > **Note**: [Proof of time complexity why it is not O(n log n) but O(n)](https://www.geeksforgeeks.org/time-complexity-of-building-a-heap/)
 
@@ -95,24 +95,24 @@ void heapify(ll i) {
 
   Store 0th index of the array as maximum element replace it with last element call heapify on root.
 
-  ```cpp
-  ll maxHeap() {
-    if (n == 0) return -1 ll;
-    ll mx = tree[0];
-    tree[0] = tree[n - 1];
-    n--;
-    heapify(0);
-    return mx;
-  }
-  //Time Complexity: O(log n)
-  //Space Complexity: O(log n)
-  ```
+```cpp
+    ll maxHeap() {
+        if (n == 0) return -1 ll;
+        ll mx = tree[0];
+        tree[0] = tree[n - 1];
+        n--;
+        heapify(0);
+        return mx;
+    }
+    //Time Complexity: O(log n)
+    //Space Complexity: O(log n)
+```
 
 - ## **Increase Key**:
 
-  Increase the key at the given index than compare it to the parent if it becomes larger than parent swap continue it till the condition till i>0 and parent is less than node.
+  Increase the key at the given index then compare it to the parent if it becomes larger than parent swap continue it till the condition till i>0 and parent is less than node.
 
-  ```cpp
+```cpp
     void increaseKey(ll i, ll key) {
         if (key < tree[i]) {
             decreaseKey(i, key);
@@ -126,13 +126,13 @@ void heapify(ll i) {
     }
     //Time Complexity: O(log n)
     //Space Complexity: O(1)
-  ```
+```
 
 - ## **Decrease Key**:
 
   Decrease the key at the given index then call heapify at that index.
 
-  ```cpp
+```cpp
     void decreaseKey(ll i, ll key) {
         if (key > tree[i]) {
             increase(i, key);
@@ -143,10 +143,29 @@ void heapify(ll i) {
     }
     //Time Complexity: O(log n)
     //Space Complexity: O(log n)
-  ```
+```
+
+- ## **Insert Key**:
+  Increase the size of tree array insert the key at last index then compare it to the parent if it becomes larger than parent swap continue it till the condition till i>0 and parent is less than node.
+
+```cpp
+    void insertElement(ll key) {
+        n++;
+        tree[n - 1] = key;
+        ll i = n - 1;
+        while (i > 0 && tree[i / 2] < tree[i]) {
+            swap(tree[i], tree[i / 2]);
+            i /= 2;
+        }
+    }
+    //Time Complexity: O(log n)
+    //Space Complexity: O(1)
+```
 
 - ## **Heapsort**:
 
 ```
 
 ```
+
+> **Note**: Operations like finding, deleting random elements or extracting minimum element from a max Heap takes O(n) time complexity since we have to perform linear search.

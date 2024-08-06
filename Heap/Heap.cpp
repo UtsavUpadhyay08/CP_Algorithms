@@ -91,6 +91,15 @@ class MaxHeap:public Heap{
 		tree[i]=key;
 		heapify(i);
 	}
+	void insertElement(ll key){
+		n++;
+		tree[n-1]=key;
+		ll i=n-1;
+		while(i>0 && tree[i/2]<tree[i]){
+			swap(tree[i],tree[i/2]);
+			i/=2;
+		}
+	}
 };
 
 
