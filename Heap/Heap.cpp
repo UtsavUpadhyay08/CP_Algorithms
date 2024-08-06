@@ -64,6 +64,28 @@ class MaxHeap:public Heap{
 			heapify(i);
 		}
 	}
+	ll maxHeap(){
+		if(n==0) return -1ll;
+		ll mx=tree[0];
+		tree[0]=tree[n-1];
+		n--;
+		heapify(0);
+		return mx;
+	}
+	void increaseKey(ll i,ll key){
+		if(key<tree[i]){
+			decreaseKey(i,key);
+			return;
+		}
+		tree[i]=key;
+		while(i>0 && tree[i/2]<tree[i]){
+			swap(tree[i],tree[i/2]);
+			i/=2;
+		}
+	}
+	void decreaseKey(ll i,ll key){
+		
+	}
 };
 
 

@@ -91,7 +91,7 @@ Space Complexity: O(log n) //Height of tree
 
   > **Note**: [Proof of time complexity why it is not O(n log n) but O(n)](https://www.geeksforgeeks.org/time-complexity-of-building-a-heap/)
 
-- ## **ExtractMax**:
+- ## **Extract Max**:
 
   Store 0th index of the array as maximum element replace it with last element call heapify on root.
 
@@ -108,6 +108,24 @@ Space Complexity: O(log n) //Height of tree
   Space Complexity: O(log n)
   ```
 
-- ##
+- ## **Increase Key**:
+
+  Increase the key at the given index than compare it to the parent if it becomes larger than parent swap continue it till the condition till i>0 and parent is less than node.
+
+  ```cpp
+    void increaseKey(ll i, ll key) {
+        if (key < tree[i]) {
+            decreaseKey(i, key);
+            return;
+        }
+        tree[i] = key;
+        while (i > 0 && tree[i / 2] < tree[i]) {
+            swap(tree[i], tree[i / 2]);
+            i /= 2;
+        }
+    }
+    Time Complexity: O(log n)
+    Space Complexity: O(1)
+  ```
 
 - ## **Heapsort**:
