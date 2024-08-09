@@ -1,7 +1,25 @@
-//{ Driver Code Starts
-
 #include <bits/stdc++.h>
+#include <ext/pb_ds/assoc_container.hpp>
+using namespace __gnu_pbds;
 using namespace std;
+ 
+#define ll long long int
+ 
+typedef tree<ll,null_type,less<ll>,rb_tree_tag,tree_order_statistics_node_update> indexed_set;
+
+#define vll vector<ll>
+#define mll map<ll,ll>
+#define pll pair<ll,ll>
+#define vpll vector<pair<ll,ll>>
+#define sll set<ll>
+
+#define f first
+#define sc second
+#define pb push_back
+#define yes cout << "YES"
+#define no cout << "NO"
+#define pno cout << -1
+
 #ifdef UTSAV
 #include "handle_debug.hpp"
 #define debug(...) cout<<'[';debug_print(#__VA_ARGS__, __VA_ARGS__);cout<<"]\n";
@@ -9,63 +27,29 @@ using namespace std;
 #define debug(...)
 #endif
 
-// } Driver Code Ends
-// User function template for C++
+const ll mod=1e9+7;
 
-class Solution {
-  public:
-    int maxLength(vector<int> a) {
-        // code here
-        vector<vector<int>> pre(a.size(),vector<int>(32,0));
-        for(int i=0;i<a.size();i++){
-            for(int j=0;j<32;j++){
-                if(((1<<j)&a[i])==(1<<j)){
-                    pre[i][j]++;
-                }
-                if(i!=0) pre[i][j]+=pre[i-1][j];
-            }
-        }
-        int ans=0,n=a.size();
-        for(int i=0;i<n;i++){
-            int l=i+1,r=n-1;
-            while(l<=r){
-                int mid=l+(r-l)/2,num=0;
-                for(int j=0;j<32;j++){
-                    int vl=pre[mid][j];
-                    if(i!=0) vl=vl-pre[i-1][j];
-                    if(vl>0){
-                        num+=(1<<j);
-                    }
-                }
-                // cout<<i;
-                // debug(i,mid,num,l,r);
-                if(((num+1)&num)==0){
-                    ans=max(ans,mid-i+1);
-                    l=mid+1;
-                }
-                else r=mid-1;
-            }
-        }
-        return ans;
-    }
-};
+#define fori(i,a,b) for(ll i=a;i<b;i++)
+#define vprint(v) for (auto it : v) cout << it << " "
+#define all(a) a.begin(),a.end()
 
-//{ Driver Code Starts.
+ll gcd(ll a, ll b){return b==0?a:gcd(b,a%b);}
+ll lcm(ll a, ll b){return (a/gcd(a,b))*b;}
+
+void solve(){
+	ll l,r;cin>>l>>r;
+	ll vl=ceil(1.0*log2(l)/log2(3.0));
+	vl=pow(3,vl);
+	vl=l%vl;
+	debug(vl)
+}
 
 int main() {
-    int t;
-    cin >> t;
-    while (t--) {
-        int n;
-        cin >> n;
-        vector<int> a(n);
-        for (int i = 0; i < n; i++) {
-            cin >> a[i];
-        }
-
-        Solution ob;
-        cout << ob.maxLength(a) << endl;
-    }
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    
+	// solve();
+    ll t;cin>>t;while(t--){solve();cout<<"\n";}
     return 0;
 }
-// } Driver Code Ends

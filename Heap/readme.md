@@ -185,7 +185,9 @@ In a max heap we know the root is the greatest element swap it with last index o
 > **Note**: Operations like finding, deleting random elements or extracting minimum element from a max Heap takes O(n) time complexity since we have to perform linear search.
 
 ## Operations
+
 - ## **Push**:
+  Call insert key operation
 - ## **Pop**:
 
 ## Practice Problems
