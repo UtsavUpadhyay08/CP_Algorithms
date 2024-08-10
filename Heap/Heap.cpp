@@ -101,11 +101,11 @@ class MaxHeap:public Heap{
 	}
 	void insertElement(ll key){
 		n++;
-		tree[n-1]=key;
+        tree[n-1]=key;
 		ll i=n-1;
-		while(i>0 && tree[i/2]<tree[i]){
-			swap(tree[i],tree[i/2]);
-			i/=2;
+		while(i>0 && tree[(i-1)/2]<=tree[i]){
+			swap(tree[i],tree[(i-1)/2]);
+			i=(i-1)/2;
 		}
 	}
 	vll heapsort(){

@@ -193,4 +193,8 @@ In a max heap we know the root is the greatest element swap it with last index o
 
 ## Practice Problems
 
-- [Last Stone Weight]()
+- [Last Stone Weight](https://leetcode.com/problems/last-stone-weight/)
+- [kth Largest Element](https://leetcode.com/problems/kth-largest-element-in-an-array/description/): Solve this using quickselect as well......
+- [Top k most frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/description/)
+
+> **Note:** Solve all problems using your own custom heap
