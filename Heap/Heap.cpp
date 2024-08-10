@@ -28,7 +28,6 @@ typedef tree<ll,null_type,less<ll>,rb_tree_tag,tree_order_statistics_node_update
 #endif
 
 const ll mod=1e9+7;
-const ll maxSize=1e6;
 
 #define fori(i,a,b) for(ll i=a;i<b;i++)
 #define vprint(v) for (auto it : v) cout << it << " "
@@ -44,7 +43,7 @@ class Heap{
 	public:
 	Heap(ll n){
 		this->n=0;
-		tree.resize(maxSize+1,0);
+		tree.resize(n+1,0);
 	}
 	Heap(ll n,vll a){
 		this->n=n;
