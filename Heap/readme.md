@@ -154,9 +154,9 @@ Increase the size of tree array insert the key at last index then compare it to 
         n++;
         tree[n - 1] = key;
         ll i = n - 1;
-        while (i > 0 && tree[i / 2] < tree[i]) {
-            swap(tree[i], tree[i / 2]);
-            i /= 2;
+        while (i > 0 && tree[(i - 1) / 2] <= tree[i]) {
+            swap(tree[i], tree[(i - 1) / 2]);
+            i = (i - 1) / 2;
         }
     }
     //Time Complexity: O(log n)
@@ -186,8 +186,11 @@ In a max heap we know the root is the greatest element swap it with last index o
 
 ## Operations
 
-- ## **Push**:
+- ### **Push**:
   Call insert key operation
-- ## **Pop**:
+- ### **Pop**:
+  Call decrease key operation
 
 ## Practice Problems
+
+- [Last Stone Weight]()
