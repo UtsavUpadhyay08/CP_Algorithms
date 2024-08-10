@@ -189,7 +189,7 @@ In a max heap we know the root is the greatest element swap it with last index o
 - ### **Push**:
   Call insert key operation
 - ### **Pop**:
-  Call decrease key operation
+  Call maxHeap operation
 
 ## Practice Problems
 
@@ -198,3 +198,5 @@ In a max heap we know the root is the greatest element swap it with last index o
 - [Top k most frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/description/)
 
 > **Note:** Solve all problems using your own custom heap
+
+> #### **Note:** To use minHeap negate the numbers while inserting ,that is convert positive numbers to negative numbers and negative numbers to positive numbers do the same at the time of retrieval.
