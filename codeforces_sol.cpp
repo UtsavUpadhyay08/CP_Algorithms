@@ -37,16 +37,7 @@ ll gcd(ll a, ll b){return b==0?a:gcd(b,a%b);}
 ll lcm(ll a, ll b){return (a/gcd(a,b))*b;}
 
 void solve(){
-	ll n,k;cin>>n>>k;
-	if(k==n){
-		fori(i,0,n) cout<<1<<" ";
-		return;
-	}
-	if(k==1 && n>2){
-		fori(i,0,n) cout<<i+1<<' ';
-		return;
-	}
-	pno;
+	ll n;cin>>n;
 	// vll a(n);for(auto &x:a) cin>>x;
 	// string s;cin>>s;
 }
