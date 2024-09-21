@@ -11,7 +11,7 @@ To run the compiled C++ program with input from a text file and store the output
     Example:
 
     ```bash
-    g++ ./cp/codeforces_sol.cpp -o ./cp/codeforces_sol
+    g++ ./codeforces_sol.cpp -o ./codeforces_sol
     ```
 
 2.  Run the program with input and output redirection:
@@ -23,7 +23,7 @@ To run the compiled C++ program with input from a text file and store the output
     Example:
 
     ```bash
-    ./cp/codeforces_sol < ./cp/input.txt > ./cp/output.txt
+    ./codeforces_sol < ./input.txt > ./output.txt
     ```
 
     This will run the program with input.txt as the input file and save the output to output.txt.
