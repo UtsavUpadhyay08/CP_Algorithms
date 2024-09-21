@@ -37,8 +37,22 @@ ll gcd(ll a, ll b){return b==0?a:gcd(b,a%b);}
 ll lcm(ll a, ll b){return (a/gcd(a,b))*b;}
 
 void solve(){
-	ll n;cin>>n;
-	// vll a(n);for(auto &x:a) cin>>x;
+	ll n,k;cin>>n>>k;
+	vll s(n);for(auto &x:s) cin>>x;
+	if(n==1){
+		if(s[0]>k) no;
+		else yes;
+		return;
+	}
+	sort(all(s));
+	ll mx=0,mn=s[0],i=1;
+	while(i<n){
+		mx+=2*mn;
+		if(i==(n-1)) mx-=mn;
+		i++;
+	}
+	if(mx<=k) yes;
+	else no;
 	// string s;cin>>s;
 }
 
@@ -48,6 +62,11 @@ int main() {
     cout.tie(NULL);
     
 	// solve();
-    ll t;cin>>t;while(t--){solve();cout<<"\n";}
+    ll t;cin>>t;
+    fori(u,1,t+1){
+    	cout<<"Case #"<<u<<": ";
+    	solve();
+    	cout<<"\n";
+	}
     return 0;
 }
